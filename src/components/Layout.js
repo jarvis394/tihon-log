@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { CssBaseline } from "@material-ui/core"
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles"
 
-import App from '../components'
+import App from './App'
 
 class Layout extends Component {
   render() {    

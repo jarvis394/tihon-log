@@ -6,8 +6,6 @@ import { Layout } from './components'
 
 import store from './store'
 
-import "./styles/index.css"
-
 ReactDOM.render(
   <Provider store={ store }>
     <Layout />
