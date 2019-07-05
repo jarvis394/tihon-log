@@ -1,14 +1,37 @@
 import React, { Component } from 'react'
 import { Typography, Container } from '@material-ui/core'
 import { connect } from 'react-redux'
-import InfiniteScroll from 'react-infinite-scroller'
 
-import { LogContainer } from './'
 import { getLogs } from '../actions/logsAcrions'
+import Logs from './Logs'
 
 class Home extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      index: 0
+    }
+
+    this.getNext = this.getNext.bind(this)
+    this.refreshLogs = this.refreshLogs.bind(this)
+    this.changeIndex = this.changeIndex.bind(this)
+  }
+
   componentDidMount() {
-    this.props.dispatch(getLogs(200, 0))
+    return this.getNext(0)
+  }
+
+  changeIndex(i) {
+    return this.setState({ index: i })
+  }
+
+  getNext(i) {
+    return this.props.dispatch(getLogs(25, 25 * i))
+  }
+
+  refreshLogs() {
+    return this.getNext(0)
   }
 
   render() {
@@ -17,8 +40,6 @@ class Home extends Component {
     return (
       <Container>
         <Typography variant="h3">Logs</Typography>
-
-        {logs.fetching && <Typography variant="h5">loading...</Typography>}
 
         {logs.error && (
           <div>
@@ -32,21 +53,13 @@ class Home extends Component {
         )}
 
         {logs.fetched && (
-          <InfiniteScroll
-            style={{ marginTop: 16 }}
-            pageStart={0}
-            loadMore={(p) => this.props.dispatch(getLogs(200, 200 * p))}
-            hasMore={true}
-            loader={
-              <div className="loader" key={0}>
-                Loading ...
-              </div>
-            }
-          >
-            {logs.logs.map((l, i) => (
-              <LogContainer key={i} data={JSON.parse(l)} />
-            ))}
-          </InfiniteScroll>
+          <Logs
+            logs={logs}
+            next={this.getNext}
+            index={this.state.index}
+            changeIndex={this.changeIndex}
+            refresh={this.refreshLogs}
+          />
         )}
       </Container>
     )
