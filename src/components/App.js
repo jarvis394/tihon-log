@@ -4,7 +4,7 @@ import { withRouter } from 'react-router'
 
 import { withStyles } from '@material-ui/core/styles'
 
-import { Home } from '../pages'
+import { Main, Home } from '../pages'
 // import { DRAWER_WIDTH as drawerWidth } from '../config'
 
 const styles = theme => ({
@@ -39,7 +39,8 @@ class App extends Component {
 
         <div className={ classes.content }>
           <Switch>
-            <Route exact path="/" render={ () => <Home handlePage={ this.handlePage } /> } />
+            <Route exact path="/" render={ () => <Main handlePage={ this.handlePage } /> } />
+            <Route exact path="/logs" render={ () => <Home handlePage={ this.handlePage } /> } />
           </Switch>
         </div>
         

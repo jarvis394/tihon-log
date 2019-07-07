@@ -3,7 +3,7 @@ import { Typography, Container } from '@material-ui/core'
 import { connect } from 'react-redux'
 
 import { getLogs } from '../actions/logsAcrions'
-import Logs from './Logs'
+import { Logs } from '../components'
 
 class Home extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class Home extends Component {
   }
 
   getNext(i) {
-    return this.props.dispatch(getLogs(25, 25 * i))
+    return this.props.dispatch(getLogs(100, 100 * i))
   }
 
   refreshLogs() {
@@ -39,7 +39,9 @@ class Home extends Component {
 
     return (
       <Container>
-        <Typography variant="h3">Logs</Typography>
+        <Typography variant="h3" style={{ marginBottom: 24 }}>
+          Logs
+        </Typography>
 
         {logs.error && (
           <div>

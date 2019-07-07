@@ -64,7 +64,10 @@ class LogContainer extends Component {
         {data.level === 'command' && (
           <Typography variant="caption">
             {'User: ' + data.senderId + ' | '}
-            <a href={link}>{'Dialog: ' + data.peerId + ' | '}</a>
+            <a target="_blank" rel="noopener noreferrer" href={link}>
+              {'Dialog: ' + data.peerId}
+            </a>
+            {' | '}
             {'ID: ' + data.id}
           </Typography>
         )}

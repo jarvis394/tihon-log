@@ -17,7 +17,6 @@ export default function reducer(
     case 'GET_LOGS': {
       return {
         ...state,
-        fetching: true
       }
     }
 
@@ -26,7 +25,8 @@ export default function reducer(
         ...state,
         logs: state.logs.concat(action.payload),
         fetched: true,
-        fetching: false
+        fetching: false,
+        error: null
       }
     }
 
